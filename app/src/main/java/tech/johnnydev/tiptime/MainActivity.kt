@@ -62,8 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         val formattedCurrency = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipResut.text = getString(R.string.tip_amount_s,formattedCurrency)
-        binding.inputServiceCost.clearFocus()
-
 
     }
 }
