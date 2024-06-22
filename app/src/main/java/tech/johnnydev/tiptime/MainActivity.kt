@@ -31,7 +31,14 @@ class MainActivity : AppCompatActivity() {
         binding.btCalculate.setOnClickListener{
             calculateButtonOnClick()
         }
-        binding.tipResut.text = getString(R.string.tip_amount_s,'-')
+
+        if(savedInstanceState !=null){
+            val tip = savedInstanceState.getString("tip")
+            binding.tipResut.text = tip
+        }else {
+            binding.tipResut.text = getString(R.string.tip_amount_s,"-")
+        }
+
     }
 
     private fun calculateButtonOnClick() {
@@ -39,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         if(textField.isEmpty() ){
             Toast.makeText(this,(R.string.error_text), Toast.LENGTH_SHORT).show()
-            return;
+            return
         }
         val cost = textField.toDouble()
 
@@ -52,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             else->1.0
         }
 
-        var tip = cost *tipPercentage;
+        var tip = cost *tipPercentage
 
         val roundUp = binding.roundSwitch.isChecked
 
@@ -63,5 +70,10 @@ class MainActivity : AppCompatActivity() {
         val formattedCurrency = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipResut.text = getString(R.string.tip_amount_s,formattedCurrency)
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("tip",binding.tipResut.text.toString())
     }
 }
