@@ -54,9 +54,8 @@ class MainActivity : AppCompatActivity() {
 
         val tipPercentage = when(selectedPercent) {
             R.id.option_eighteen_percent ->0.18
-            R.id.option_twenty_percent->0.20
             R.id.option_fifteen_percent->0.15
-            else->1.0
+            else->0.20
         }
 
         var tip = cost *tipPercentage
